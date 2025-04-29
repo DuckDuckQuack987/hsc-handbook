@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>HSC Success Handbook | Australian Student Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HSC Success Handbook | NSW Student Guide</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html-docx-js/0.4.0/html-docx.min.js"></script>
+</head>
   <style>
     .section-card {transition: all 0.3s ease; border-left: 4px solid;}
     .section-card:hover {transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
@@ -968,23 +971,6 @@ function printSection(button) {
     setTimeout(() => printWindow.print(), 500);
 }
 
-function downloadDocx(button) {
-    const section = button.closest('.section-card');
-    const content = section.querySelector('.printable')?.innerHTML || section.innerHTML;
-    const html = `
-        <!DOCTYPE html>
-        <html><head><meta charset='utf-8'></head><body>${content}</body></html>
-    `;
-    const converted = htmlDocx.asBlob(html, { orientation: 'portrait' });
-    saveAs(converted, 'section.docx');
-}
-<script>
-function downloadFullDocx() {
-  const handbookContent = document.querySelector('main')?.innerHTML || document.body.innerHTML;
-  const html = '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>' + handbookContent + '</body></html>';
-  const blob = htmlDocx.asBlob(html, {orientation: 'portrait'});
-  saveAs(blob, 'HSC_Success_Handbook.docx');
-}
 <script>
 function printSection(button) {
   const section = button.closest('.section-card');
@@ -995,9 +981,25 @@ function printSection(button) {
   window.print();
   document.body.innerHTML = originalContent;
 }
+function downloadEntireDocx() {
+    const handbookContent = document.querySelector('main')?.innerHTML || document.body.innerHTML;
+    const html = '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>' + handbookContent + '</body></html>';
+    const blob = window.htmlDocx.asBlob(html, {orientation: 'portrait'});
+    window.saveAs(blob, 'HSC_Success_Handbook.docx');
+}
+function downloadDocx(button) {
+    const section = button.closest('.section-card');
+    const content = section.querySelector('.printable') ? section.querySelector('.printable').innerHTML : section.innerHTML;
+    const fullHtml = '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>' + content + '</body></html>';
+    const blob = window.htmlDocx.asBlob(fullHtml, {orientation: 'portrait'});
+    window.saveAs(blob, 'section.docx');
+}
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html-docx-js/0.4.0/html-docx.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 </script>
+
+<script src="https://cdn.jsdelivr.net/gh/evidenceprime/html-docx-js/html-docx.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
 </body>
 </html>
