@@ -1,40 +1,23 @@
 <!DOCTYPE html>
-
 <html lang="en">
-<head><script>window.huggingface={variables:{"SPACE_CREATOR_USER_ID":"680f12fad0d51474615f7d85"}};</script>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>HSC Success Handbook | Australian Student Guide</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<style>
-        .section-card {
-            transition: all 0.3s ease;
-            border-left: 4px solid;
-        }
-        .section-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .template-card {
-            background: linear-gradient(to bottom right, #f8fafc, #f1f5f9);
-        }
-        .printable {
-            border: 1px dashed #cbd5e1;
-        }
-        .progress-bar {
-            transition: width 1s ease-in-out;
-        }
-        [contenteditable="true"]:focus {
-            outline: none;
-            background-color: #f8fafc;
-            border-radius: 4px;
-        }
-        .habit-tracker div:hover {
-            transform: scale(1.05);
-        }
-    </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script><script src="https://unpkg.com/html-docx-js@0.4.0/dist/html-docx.min.js"></script></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>HSC Success Handbook | Australian Student Guide</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    .section-card {transition: all 0.3s ease; border-left: 4px solid;}
+    .section-card:hover {transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
+    .template-card {background: linear-gradient(to bottom right, #f8fafc, #f1f5f9);}
+    .printable {border: 1px dashed #cbd5e1;}
+    .progress-bar {transition: width 1s ease-in-out;}
+    [contenteditable="true"]:focus {outline: none; background-color: #f8fafc; border-radius: 4px;}
+    .habit-tracker div:hover {transform: scale(1.05);}
+  </style>
+</head>
 <body class="bg-gray-50 font-sans">
 <header class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white py-12 px-6 shadow-lg">
 <div class="container mx-auto text-center">
@@ -966,10 +949,10 @@ function downloadFullDocx() {
 </div>
 </div>
 <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-<p>© 2025 HSC Success Handbook. This resource is designed for NSW Year 11 and 12 students by M Blakeley 2025.</p>
-<p class="mt-1 text-xs">Disclaimer: This handbook is for educational purposes only and does not replace professional advice.</p>
-</div>
-
+      <p>© 2025 HSC Success Handbook. This resource is designed for NSW Year 11 and 12 students by M Blakeley 2025.</p>
+      <p class="mt-1 text-xs">Disclaimer: This handbook is for educational purposes only and does not replace professional advice.</p>
+    </div>
+  </div>
 </footer>
 
 <p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img alt="DeepSite Logo" src="https://enzostvs-deepsite.hf.space/logo.svg" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"/><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank">DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=DuckDuckQuack789/playground" style="color: #fff;text-decoration: underline;" target="_blank">Remix</a></p><script>
@@ -995,12 +978,26 @@ function downloadDocx(button) {
     const converted = htmlDocx.asBlob(html, { orientation: 'portrait' });
     saveAs(converted, 'section.docx');
 }
-
-function downloadEntireDocx() {
-    const handbookContent = document.querySelector('main')?.innerHTML || document.body.innerHTML;
-    const html = '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>' + handbookContent + '</body></html>';
-    const blob = htmlDocx.asBlob(html, {orientation: 'portrait'});
-    saveAs(blob, 'HSC_Success_Handbook.docx');
+<script>
+function downloadFullDocx() {
+  const handbookContent = document.querySelector('main')?.innerHTML || document.body.innerHTML;
+  const html = '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>' + handbookContent + '</body></html>';
+  const blob = htmlDocx.asBlob(html, {orientation: 'portrait'});
+  saveAs(blob, 'HSC_Success_Handbook.docx');
 }
-</script></body>
+<script>
+function printSection(button) {
+  const section = button.closest('.section-card');
+  const printContent = section.innerHTML;
+  const originalContent = document.body.innerHTML;
+
+  document.body.innerHTML = printContent;
+  window.print();
+  document.body.innerHTML = originalContent;
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html-docx-js/0.4.0/html-docx.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</script>
+</body>
 </html>
